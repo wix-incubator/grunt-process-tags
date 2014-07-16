@@ -1,6 +1,6 @@
 /*
  * grunt-process-statics
- * 
+ *
  *
  * Copyright (c) 2014 Wix.com
  * Licensed under the MIT license.
@@ -36,18 +36,14 @@ module.exports = function (grunt) {
       default_options: {
         options: {
         },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
+        files: [
+          {
+            expand: true,
+            cwd: 'test/fixtures/',
+            src: ['*'],
+            dest: 'tmp/'
+          }
+        ]
       }
     },
 

@@ -1,6 +1,5 @@
 /*
  * grunt-process-statics
- * 
  *
  * Copyright (c) 2014 Wix.com
  * Licensed under the MIT license.
@@ -9,43 +8,58 @@
 'use strict';
 
 module.exports = function (grunt) {
-
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+  var url = require('url');
+  var BlockExtractor = require('../lib/blockextractor');
+  var FilterProcessor = require('../lib/filterprocessor');
 
   grunt.registerMultiTask('process_statics', 'Task to process static resources URIs.', function () {
-
-    // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
+      processors: {
+        prefix: function (prefix) {
+          return function (string) {
+            string = string + '';
+            if (string.indexOf(prefix) === 0) {
+              return string;
+            }
+            if (url.parse(string).protocol) {
+              return string;
+            }
+            return prefix + string;
+          }
+        }
+      },
+      patterns: [
+        [
+          /<script.+src=['"]([^"']+)["']/gm,
+          'Update the HTML with processed script files'
+        ],
+        [
+          /<link[^\>]+href=['"]([^"']+)["']/gm,
+          'Update the HTML with processed css file names'
+        ]
+      ]
     });
 
-    // Iterate over all specified file groups.
+    var extractor = new BlockExtractor(),
+      processor = new FilterProcessor(options.processors, options.patterns);
+
     this.files.forEach(function (file) {
-      // Concat specified files.
-      var src = file.src.filter(function (filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
+      file.src.filter(function (filename) {
+        if (!grunt.file.exists(filename)) {
+          grunt.log.warn('Source file "' + filename + '" not found.');
           return false;
         } else {
           return true;
         }
-      }).map(function (filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+      }).forEach(function (filename) {
+        grunt.log.writeln('Processing file "' + filename + '"');
 
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(file.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + file.dest + '" created.');
+        var content = grunt.file.read(filename);
+        extractor.extractBlocks(content).forEach(function (block) {
+          content = content.replace(block.rawContent, processor.process(block.filter, block.content.trim()));
+        });
+        grunt.file.write(file.dest, content);
+      });
     });
   });
-
 };
