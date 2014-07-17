@@ -25,7 +25,7 @@ module.exports = function (grunt) {
               return string;
             }
             return prefix + string;
-          }
+          };
         }
       },
       patterns: [
