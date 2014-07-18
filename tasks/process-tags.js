@@ -34,6 +34,15 @@ module.exports = function (grunt) {
       };
     };
 
+    options.processors.chain = options.processors.chain || function () {
+      var args = Array.prototype.slice.call(arguments);
+      return function (content) {
+        return args.reduce(function (result, fn) {
+          return fn(result);
+        }, content);
+      };
+    };
+
     var extractor = new BlockExtractor(),
       processor = new FilterProcessor(options.processors, options.patterns);
 
