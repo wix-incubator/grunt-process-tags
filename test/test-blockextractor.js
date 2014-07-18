@@ -17,28 +17,28 @@ describe('BlockExtractor', function () {
         expected: []
       },
       {
-        content: '<!-- process_statics filter() --><!-- end_process_statics -->',
+        content: '<!-- process-tags filter() --><!-- end-process-tags -->',
         expected: [
           {
             filter: 'filter()',
             content: '',
-            rawContent: '<!-- process_statics filter() --><!-- end_process_statics -->'
+            rawContent: '<!-- process-tags filter() --><!-- end-process-tags -->'
           }
         ]
       },
       {
-        content: '<!-- process_statics first() -->first-block-content<!-- end_process_statics -->' +
-          '<!-- process_statics second() -->second-block-content<!-- end_process_statics -->',
+        content: '<!-- process-tags first() -->first-block-content<!-- end-process-tags -->' +
+          '<!-- process-tags second() -->second-block-content<!-- end-process-tags -->',
         expected: [
           {
             filter: 'first()',
             content: 'first-block-content',
-            rawContent: '<!-- process_statics first() -->first-block-content<!-- end_process_statics -->'
+            rawContent: '<!-- process-tags first() -->first-block-content<!-- end-process-tags -->'
           },
           {
             filter: 'second()',
             content: 'second-block-content',
-            rawContent: '<!-- process_statics second() -->second-block-content<!-- end_process_statics -->'
+            rawContent: '<!-- process-tags second() -->second-block-content<!-- end-process-tags -->'
           }
         ]
       }
@@ -50,7 +50,7 @@ describe('BlockExtractor', function () {
   });
 
   it('should not match block without filter definition', function () {
-    var content = '<!-- process_statics -->block with missing filter<!-- end_process_statics -->';
+    var content = '<!-- process-tags -->block with missing filter<!-- end-process-tags -->';
 
     assert.deepEqual(extractor.extractBlocks(content), []);
   });
