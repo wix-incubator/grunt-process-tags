@@ -1,8 +1,8 @@
 {
-  "name": "grunt-process-statics",
+  "name": "grunt-process-tags",
   "version": "0.0.1",
   "description": "Task to process static resources URIs.",
-  "repository": "git@github.com:wix/grunt-process-statics.git",
+  "repository": "git@github.com:wix/grunt-process-tags.git",
   "author": {
     "name": "Wix.com",
     "email": "",

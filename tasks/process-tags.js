@@ -1,10 +1,3 @@
-/*
- * grunt-process-statics
- *
- * Copyright (c) 2014 Wix.com
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 module.exports = function (grunt) {
@@ -12,7 +5,7 @@ module.exports = function (grunt) {
   var BlockExtractor = require('../lib/blockextractor');
   var FilterProcessor = require('../lib/filterprocessor');
 
-  grunt.registerMultiTask('process_statics', 'Task to process static resources URIs.', function () {
+  grunt.registerMultiTask('processTags', 'Task to process HTML tags.', function () {
     var options = this.options({
       processors: {
         prefix: function (prefix) {

@@ -6,12 +6,12 @@ var grunt = require('grunt');
 grunt.task.init([]);
 grunt.config.init({});
 
-describe('process-statics', function () {
+describe('processTags', function () {
   it('should work with defaults', function () {
     grunt.log.muted = true;
 
     grunt.config.init();
-    grunt.config('process_statics', {
+    grunt.config('processTags', {
       default_options: {
         options: {
         },
@@ -25,7 +25,7 @@ describe('process-statics', function () {
         ]
       }
     });
-    grunt.task.run('process_statics');
+    grunt.task.run('processTags');
     grunt.task.start();
 
     assert.equal(

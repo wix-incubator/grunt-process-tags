@@ -1,4 +1,4 @@
-# grunt-process-statics
+# grunt-process-tags
 
 > Task to process static resources URIs.
 
@@ -8,13 +8,13 @@ This plugin requires Grunt.
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-process-statics --save-dev
+npm install grunt-process-tags --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-process-statics');
+grunt.loadNpmTasks('grunt-process-tags');
 ```
 
 ## The "process_statics" task
@@ -24,7 +24,7 @@ In your project's Gruntfile, add a section named `process_statics` to the data o
 
 ```js
 grunt.initConfig({
-  process_statics: {
+  processTags: {
     options: {
       // Task-specific options go here.
     },
@@ -56,7 +56,7 @@ In this example, the default options are used to do something with whatever. So 
 
 ```js
 grunt.initConfig({
-  process_statics: {
+  processTags: {
     options: {},
     files: {
       'dest/default_options': ['src/testing', 'src/123'],
@@ -70,7 +70,7 @@ In this example, custom options are used to do something else with whatever else
 
 ```js
 grunt.initConfig({
-  process_statics: {
+  processTags: {
     options: {
       separator: ': ',
       punctuation: ' !!!',
@@ -84,9 +84,6 @@ grunt.initConfig({
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-_(Nothing yet)_
 
 ## License
 Copyright (c) 2014 Wix.com. Licensed under the MIT license.
