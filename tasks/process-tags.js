@@ -8,18 +8,6 @@ module.exports = function (grunt) {
   grunt.registerMultiTask('processTags', 'Task to process HTML tags.', function () {
     var options = this.options({
       processors: {
-        prefix: function (prefix) {
-          return function (string) {
-            string = string + '';
-            if (string.indexOf(prefix) === 0) {
-              return string;
-            }
-            if (url.parse(string).protocol) {
-              return string;
-            }
-            return prefix + string;
-          };
-        }
       },
       patterns: [
         [
@@ -32,6 +20,19 @@ module.exports = function (grunt) {
         ]
       ]
     });
+
+    options.processors.prefix = options.processors.prefix || function (prefix) {
+      return function (string) {
+        string = string + '';
+        if (string.indexOf(prefix) === 0) {
+          return string;
+        }
+        if (url.parse(string).protocol) {
+          return string;
+        }
+        return prefix + string;
+      };
+    };
 
     var extractor = new BlockExtractor(),
       processor = new FilterProcessor(options.processors, options.patterns);
