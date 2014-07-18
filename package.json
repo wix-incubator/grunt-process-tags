@@ -1,7 +1,7 @@
 {
   "name": "grunt-process-tags",
   "version": "0.0.1",
-  "description": "Task to process static resources URIs.",
+  "description": "Task to process HTML tags.",
   "repository": "git@github.com:wix/grunt-process-tags.git",
   "author": {
     "name": "Wix.com",

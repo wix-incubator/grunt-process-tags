@@ -1,6 +1,6 @@
 # grunt-process-tags
 
-> Task to process static resources URIs.
+> Task to process HTML tags.
 
 ## Getting Started
 This plugin requires Grunt.
@@ -17,10 +17,10 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-process-tags');
 ```
 
-## The "process_statics" task
+## The "processTags" task
 
 ### Overview
-In your project's Gruntfile, add a section named `process_statics` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `processTags` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
@@ -37,49 +37,73 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.processors
+Type: `Object`
+Default value: `{}`
 
-A string value that is used to do something with whatever.
+An object with keys as a functions. Provided functions can be used to process tags.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### options.patterns
+Type: `Array`
+Default value: `[]`
 
-A string value that is used to do something else with whatever else.
+An array containing RegExp patters to match content. Pattern must contain 1st subgroup.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default options are used. 
 
 ```js
 grunt.initConfig({
   processTags: {
     options: {},
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'dest/index.html': 'src/index.html',
     },
   },
 })
 ```
 
+```html
+<!-- process-tags prefix('first/') -->
+<script src="should/be/prefixed/by/first"></script>
+<!-- end-process-tags -->
+```
+
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, custom options are used.
 
 ```js
 grunt.initConfig({
   processTags: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      processors: {
+        asFn: function (content) {
+          return content;
+        },
+        asFactoryFn: function (parameter) {
+          return function (content) {
+            return parameter;
+          }
+        }
+      }
     },
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'dest/index.html': 'src/index.html',
     },
   },
 })
+```
+
+```html
+<!-- process-tags asFn -->
+<script src="should/be/left/as/it/is"></script>
+<!-- end-process-tags -->
+
+<!-- process-tags asFactoryFn('result/content') -->
+<script src="should/be/replaced/by/result/content"></script>
+<!-- end-process-tags -->
 ```
 
 ## Contributing
