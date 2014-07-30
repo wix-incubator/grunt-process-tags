@@ -104,6 +104,10 @@ grunt.initConfig({
 <!-- process-tags asFactoryFn('result/content') -->
 <script src="should/be/replaced/by/result/content"></script>
 <!-- end-process-tags -->
+
+<!-- process-tags chain(asFn, prefix('shahata/')) -->
+<script src="should/execute/both/processors"></script>
+<!-- end-process-tags -->
 ```
 
 ## Contributing
