@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function (grunt) {
-  var url = require('url');
   var BlockExtractor = require('../lib/blockextractor');
   var FilterProcessor = require('../lib/filterprocessor');
 
@@ -27,7 +26,7 @@ module.exports = function (grunt) {
         if (string.indexOf(prefix) === 0) {
           return string;
         }
-        if (url.parse(string).protocol) {
+        if (string.match(/^([a-z]*:)?\/\//)) {
           return string;
         }
         return prefix + string;
