@@ -30,6 +30,6 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "ng-parser": "^0.1.0"
+    "ng-parser": "^0.3.0"
   }
 }
