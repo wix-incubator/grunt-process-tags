@@ -1,6 +1,6 @@
 {
   "name": "grunt-process-tags",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Task to process HTML tags.",
   "repository": "git@github.com:wix/grunt-process-tags.git",
   "author": {
